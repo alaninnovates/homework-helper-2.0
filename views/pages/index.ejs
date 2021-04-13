@@ -1,0 +1,18 @@
+<%- include('../partials/head') %>
+<h1>Homework help</h1>
+<br />
+<p><a href="/new">Add question</a></p>
+<br />
+<% if (posts) { %> <% posts.forEach(post => { %>
+<div class="card" style="width: 60rem">
+	<div class="card-body">
+		<a href="<%= `/question/${post.rowid}` %>"
+			><h5 class="card-title"><%= post.topic %></h5></a
+		>
+		<p class="card-text"><%= post.question %></p>
+	</div>
+</div>
+<br />
+<% }) %> <% } else { %>
+<p>no posts to show!</p>
+<% } %> <%- include('../partials/footer') %>

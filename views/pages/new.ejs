@@ -1,0 +1,46 @@
+<%- include('../partials/head') %>
+<form role="form" method="POST" action="/api/new">
+	<div class="form-group">
+		<label for="firstName">First name</label>
+		<input
+			type="text"
+			class="form-control"
+			id="firstName"
+			name="firstName"
+			aria-describedby="first name"
+			placeholder="Enter first name (OPTIONAL)"
+		/>
+	</div>
+	<br />
+	<div class="form-group">
+		<label for="topic">Subject</label>
+		<input
+			type="text"
+			class="form-control"
+			id="topic"
+			name="topic"
+			aria-describedby="subject"
+			placeholder="Enter subject"
+			required
+		/>
+		<small id="subjectHelp" class="form-text text-muted"
+			>For example: math, social studies, history</small
+		>
+	</div>
+	<br />
+	<div class="form-group">
+		<label for="question">Question</label>
+		<input
+			type="text"
+			class="form-control"
+			id="question"
+			name="question"
+			aria-describedby="question"
+			placeholder="Enter question"
+			required
+		/>
+	</div>
+	<br />
+	<button type="submit" class="btn btn-primary">Ask question</button>
+</form>
+<%- include('../partials/footer') %>

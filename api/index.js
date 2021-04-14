@@ -18,6 +18,13 @@ app.use(
 	})
 );
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Credentials', 'true');
+	res.header('Access-Control-Allow-Methods', 'POST');
+	res.header('Access-Control-Allow-Headers', 'Authorization, Content-Type');
+	next();
+});
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
@@ -37,7 +44,7 @@ app.get('/question/:id', async (req, res) => {
 	if (!id) return res.redirect('/404');
 	const data = 'Get question content with post id';
 	const comments = 'Get comments with post id';
-	if (!data[0] || !comments) return res.redirect('/404');
+	if (!data || !comments) return res.redirect('/404');
 
 	res.render(path.join(__dirname, 'views', 'pages', 'question.ejs'), {
 		data: data[0],
@@ -63,6 +70,35 @@ app.post('/api/comment', async (req, res) => {
 
 	('Insert a comment with comment, postid, user');
 	res.redirect(`/question/${postid}`);
+});
+
+app.get('/getQuestions', async (req, res) => {
+	// const questions = await questionModel.find();
+	res.json({
+		success: true,
+		questions: [
+			{ subject: 'math', question: 'hi' },
+			{ subject: 'math', question: 'hi' },
+			{ subject: 'math', question: 'hi' },
+			{ subject: 'ela', question: 'hi' },
+			{ subject: 'math', question: 'hi' },
+			{ subject: 'math', question: 'hi' },
+		],
+	});
+});
+
+app.get('/details/:qId', (req, res) => {
+	res.json({
+		success: true,
+		question: 'Hello',
+		subject: 'math',
+		comments: [
+			{
+				comment: 'hai',
+				author: 'Bobby',
+			},
+		],
+	});
 });
 
 app.get('/404', (req, res) => {

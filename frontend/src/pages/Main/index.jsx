@@ -40,7 +40,11 @@ class Main extends React.Component {
 		return (
 			<>
 				{this.state.questions.map(q => (
-					<Question subject={q.subject} question={q.question} />
+					<Question
+						subject={q.subject}
+						question={q.question}
+						id={q.id}
+					/>
 				))}
 			</>
 		);

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 function Question(props) {
 	return (
@@ -18,10 +18,12 @@ function Question(props) {
 						lineHeight="tight"
 						isTruncated
 					>
-						{props.subject}
+						<a href={`/question?q=${props.id}`}>{props.subject}</a>
 					</Box>
 
-					<Box>{props.question}</Box>
+					<Box>
+						<Text noOfLines={2}>{props.question}</Text>
+					</Box>
 				</Box>
 			</Box>
 			<br />

@@ -83,9 +83,13 @@ class Question extends React.Component {
 				<br />
 				<Text fontSize="2xl">Comments</Text>
 				<br />
-				{this.state.comments.map(comment => (
-					<Comment key={comment._id} data={comment} />
-				))}
+				<Box borderWidth="1px" borderRadius="lg" width="40em" p="6">
+					{this.state.comments.map(comment => (
+						<Comment key={comment._id} data={comment} />
+					))}
+					<br />
+				</Box>
+
 				<br />
 				<Center>
 					<Box borderWidth="1px" borderRadius="lg" width="35em" p="6">

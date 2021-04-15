@@ -1,15 +1,33 @@
 const fetch = require('node-fetch');
 
-module.exports = {
+async function post(path, data) {
+	const q = await fetch(`http://localhost:8000/api/${path}`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(data),
+	});
+	return await q.json();
+}
+async function get(path) {
+	const q = await fetch(`http://localhost:8000/api/${path}`);
+	return await q.json();
+}
+
+const methods = {
 	async getQuestions() {
-		const q = await fetch('http://localhost:8000/getQuestions');
-		const res = await q.json();
-		return res;
+		return await get('getQuestions');
 	},
 	async getQuestionDetails(qId) {
-		const q = await fetch(`http://localhost:8000/details/${qId}`);
-		const res = await q.json();
-		console.log(res);
-		return res;
+		return await get(`details/${qId}`);
+	},
+	async newQuestion(data) {
+		return await post('new', data);
+	},
+	async newComment(data) {
+		return await post('comment', data);
 	},
 };
+
+module.exports = methods;

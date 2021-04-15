@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema(
 	{
-		comment: String,
 		postid: String,
-		user: String,
+		comment: String,
+		name: String,
 	},
 	{
 		timestamps: true,

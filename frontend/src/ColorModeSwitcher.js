@@ -6,7 +6,11 @@ export const ColorModeSwitcher = props => {
 	const { toggleColorMode } = useColorMode();
 	const text = useColorModeValue('dark', 'light');
 	const SwitchIcon = useColorModeValue(FaMoon, FaSun);
-
+	const style = {
+		position: 'fixed',
+		top: 10,
+		right: 20,
+	};
 	return (
 		<IconButton
 			size="md"
@@ -16,6 +20,7 @@ export const ColorModeSwitcher = props => {
 			color="current"
 			marginLeft="2"
 			onClick={toggleColorMode}
+			style={style}
 			icon={<SwitchIcon />}
 			{...props}
 		/>

@@ -1,6 +1,15 @@
 import React from 'react';
-import { Stack, Text } from '@chakra-ui/react';
-import { getQuestionDetails } from '../../scripts/api';
+import {
+	Stack,
+	Text,
+	Textarea,
+	Input,
+	Button,
+	Box,
+	Center,
+} from '@chakra-ui/react';
+import Comment from './comment';
+import { getQuestionDetails, newComment } from '../../scripts/api';
 
 class Question extends React.Component {
 	constructor() {
@@ -8,6 +17,8 @@ class Question extends React.Component {
 		this.state = {
 			question: '',
 			subject: '',
+			name: '',
+			postid: '',
 			comments: [],
 
 			comment: '',
@@ -21,17 +32,15 @@ class Question extends React.Component {
 	async componentDidMount() {
 		const id = new URLSearchParams(this.props.location.search).get('q');
 		if (!id) return (window.location.href = '/404');
-		const {
-			question,
-			subject,
-			author,
-			comments,
-		} = await getQuestionDetails(id);
+		const { question, subject, name, comments } = await getQuestionDetails(
+			id
+		);
 		this.setState({
 			question,
 			subject,
-			author,
-			comments,
+			name,
+			comments: comments === null ? [] : comments,
+			postid: id,
 		});
 	}
 
@@ -49,42 +58,74 @@ class Question extends React.Component {
 		}
 	}
 
-	handleSubmit(event) {
+	async handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state);
+		await newComment(this.state);
+		// this.setState({ comment: '', commentAuthor: '' });
+		window.location.reload();
 	}
 
 	render() {
 		return (
 			<div>
-				<Stack spacing={3}>
-					<Text fontSize="3xl">{this.state.question}</Text>
-					<Text fontSize="2xl">{this.state.question}</Text>
-					<Text fontSize="sm">Author: {this.state.author}</Text>
-				</Stack>
-				<form className="addQuestion" onSubmit={this.handleSubmit}>
-					<label>
-						Name:
-						<input
-							type="text"
-							id="fname"
-							value={this.state.commentAuthor}
-							onChange={this.handleChange}
-						/>
-					</label>
-					<br />
-					<label>
-						Comment:
-						<input
-							type="text"
-							id="comment"
-							value={this.state.comment}
-							onChange={this.handleChange}
-						/>
-					</label>
-					<br />
-					<input type="submit" value="Submit" />
-				</form>
+				<br />
+				<Center>
+					<Box borderWidth="1px" borderRadius="lg" width="40em" p="6">
+						<Stack spacing={3}>
+							<Text fontSize="3xl">{this.state.subject}</Text>
+							<Text fontSize="2xl">{this.state.question}</Text>
+							<Text fontSize="1xl">
+								Author: {this.state.name}
+							</Text>
+						</Stack>
+					</Box>
+				</Center>
+				<br />
+				<Text fontSize="2xl">Comments</Text>
+				<br />
+				{this.state.comments.map(comment => (
+					<Comment key={comment._id} data={comment} />
+				))}
+				<br />
+				<Center>
+					<Box borderWidth="1px" borderRadius="lg" width="35em" p="6">
+						<form
+							className="addQuestion"
+							onSubmit={this.handleSubmit}
+						>
+							<label>
+								Name:
+								<br />
+								<Input
+									width="10em"
+									height="2em"
+									placeholder="Name (optional)"
+									type="text"
+									id="fname"
+									value={this.state.commentAuthor}
+									onChange={this.handleChange}
+								/>
+							</label>
+							<br />
+							<label>
+								Answer:
+								<br />
+								<Textarea
+									width="30em"
+									placeholder="Answer to add"
+									type="text"
+									id="comment"
+									value={this.state.comment}
+									onChange={this.handleChange}
+								/>
+							</label>
+							<br />
+							<Button type="submit" colorScheme="blue">
+								Add answer
+							</Button>
+						</form>
+					</Box>
+				</Center>
 			</div>
 		);
 	}

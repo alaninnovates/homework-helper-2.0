@@ -1,5 +1,6 @@
 import React from 'react';
 import Question from '../../components/Question';
+import { Text } from '@chakra-ui/react';
 import { getQuestions } from '../../scripts/api';
 
 // function Main() {
@@ -35,15 +36,20 @@ class Main extends React.Component {
 		this.setState({
 			questions,
 		});
+		console.log(this.state);
 	}
 	render() {
 		return (
 			<>
+				<Text fontSize="3xl">Recent questions</Text>
+				<br />
+				<br />
 				{this.state.questions.map(q => (
 					<Question
+						key={q._id}
 						subject={q.subject}
 						question={q.question}
-						id={q.id}
+						id={q._id}
 					/>
 				))}
 			</>

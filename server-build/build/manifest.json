@@ -1,0 +1,9 @@
+{
+	"short_name": "Homework helper",
+	"name": "Homework helper",
+	"icons": [],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}

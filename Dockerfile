@@ -1,3 +1,4 @@
 FROM node:14
 WORKDIR /app
-CMD npm install && npm start
+CMD npm start
+# rm -rf node_modules && npm install && 

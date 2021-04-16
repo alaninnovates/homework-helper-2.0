@@ -15,19 +15,15 @@ async function get(path) {
 	return await q.json();
 }
 
-const methods = {
-	async getQuestions() {
-		return await get('getQuestions');
-	},
-	async getQuestionDetails(qId) {
-		return await get(`details/${qId}`);
-	},
-	async newQuestion(data) {
-		return await post('new', data);
-	},
-	async newComment(data) {
-		return await post('comment', data);
-	},
-};
-
-module.exports = methods;
+export async function getQuestions() {
+	return await get('getQuestions');
+}
+export async function getQuestionDetails(qId) {
+	return await get(`details/${qId}`);
+}
+export async function newQuestion(data) {
+	return await post('new', data);
+}
+export async function newComment(data) {
+	return await post('comment', data);
+}

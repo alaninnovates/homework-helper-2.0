@@ -27,7 +27,6 @@ function Comment(props) {
 					</Box>
 				</Box>
 			</Box>
-			<br />
 		</Center>
 	);
 }

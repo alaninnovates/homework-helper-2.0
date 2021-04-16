@@ -1,34 +1,23 @@
 import React from 'react';
-import { Box, Text, Center } from '@chakra-ui/react';
+import { Box, Text, Center, Heading } from '@chakra-ui/react';
 
 function Question(props) {
 	return (
 		<>
 			<Center>
 				<Box
-					maxW="sm"
+					p={5}
+					shadow="md"
 					borderWidth="1px"
 					borderRadius="lg"
-					overflow="hidden"
 					width="25em"
 				>
-					<Box p="6">
-						<Box
-							mt="1"
-							fontWeight="semibold"
-							as="h4"
-							lineHeight="tight"
-							isTruncated
-						>
-							<a href={`/question?q=${props.id}`}>
-								{props.subject}
-							</a>
-						</Box>
-
-						<Box>
-							<Text noOfLines={2}>{props.question}</Text>
-						</Box>
-					</Box>
+					<a href={`/question?q=${props.id}`}>
+						<Heading fontSize="xl">{props.subject}</Heading>
+					</a>
+					<Text mt={4} noOfLines={2}>
+						{props.question}
+					</Text>
 				</Box>
 			</Center>
 			<br />

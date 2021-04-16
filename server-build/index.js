@@ -3,4 +3,4 @@ require('express')()
 	.get('/*', (req, res) =>
 		res.sendFile(require('path').join(__dirname, 'build', 'index.html'))
 	)
-	.listen(3000, () => console.log('Server up on port 8000'));
+	.listen(3000, () => console.log('Server up on port 3000'));

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Text, Center, Heading } from '@chakra-ui/react';
+import './Question.css';
 
 function Question(props) {
 	return (
@@ -11,6 +12,7 @@ function Question(props) {
 					borderWidth="1px"
 					borderRadius="lg"
 					width="25em"
+					className="questionBox"
 				>
 					<a href={`/question?q=${props.id}`}>
 						<Heading fontSize="xl">{props.subject}</Heading>

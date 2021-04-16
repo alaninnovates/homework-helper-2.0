@@ -1,6 +1,6 @@
 import React from 'react';
 import Question from '../../components/Question';
-import { Text } from '@chakra-ui/react';
+import { Text, Box, Flex, Spacer } from '@chakra-ui/react';
 import { getQuestions } from '../../scripts/api';
 
 // function Main() {
@@ -44,6 +44,19 @@ class Main extends React.Component {
 				<Text fontSize="3xl">Recent questions</Text>
 				<br />
 				<br />
+				<Box
+					width="20em"
+					p={3}
+					color="white"
+					borderWidth="1px"
+					borderRadius="lg"
+					marginLeft="auto"
+					marginRight="20"
+				>
+					<Text fontSize="2xl">
+						<a href="/new">Add</a>
+					</Text>
+				</Box>
 				{this.state.questions.map(q => (
 					<Question
 						key={q._id}
